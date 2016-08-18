@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import startupReducer from '../reducers/startupReducers'
+import startupReducer from '../reducers/startupReducer'
 
 
 
@@ -24,7 +24,7 @@ export default {
 
   },
 
-  configureStore: () => {
+  currentStore: () => {
     return store 
   }
 

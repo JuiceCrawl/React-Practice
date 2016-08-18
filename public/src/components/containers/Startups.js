@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import superagent from 'superagent'
 import APIClient from '../../utils/APIClient'
+import store from '../../stores/store'
+import actions from '../../actions/actions'
+import { connect } from 'react-redux'
 
 class Startups extends Component {
 
   constructor(props, context){
     super(props, context)
     this.state = {
-      startups: [],
       title: 'Not Startups'
     }
+    
   }
 
   componentDidMount(){
@@ -17,11 +20,9 @@ class Startups extends Component {
     APIClient.get('/api/startup', null, (err, response)=>{
 
       const startups = response.startups
+      store.currentStore().dispatch(actions.startupsReceived(startups))
 
-      this.setState({
-        startups: startups,
-        title: 'Startups!!'
-      })
+     
 
       //console.log('componentDidMount:', JSON.stringify(response))
     })
@@ -36,16 +37,18 @@ class Startups extends Component {
 
   render(){
 
-    const startupNames = this.state.startups.map((startup, i) =>{
-          return <li key={i}>{startup.name}</li>
-        })
+    var startupList = this.props.startups.map((startup, i) => {
+      return (
+        <li key={i}>{startup.name}</li>
+      )
+    })
 
     return (
       <div>
         {this.state.title}
         
         <ol>
-            {startupNames}
+          {startupList}
         </ol>
         
       
@@ -55,7 +58,14 @@ class Startups extends Component {
   }
 }
 
-export default Startups
+const stateToProps = function(state){
+  return {
+    startups: state.startupReducer.startups
+  }
+
+}
+
+export default connect(stateToProps)(Startups)
 
 //npm install superagent --save makes api requests, not needd in angular
 
