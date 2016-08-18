@@ -56,7 +56,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Startups = __webpack_require__(182);
+	var _Startups = __webpack_require__(175);
 	
 	var _Startups2 = _interopRequireDefault(_Startups);
 	
@@ -21535,9 +21535,106 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 175 */,
-/* 176 */,
-/* 177 */
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _superagent = __webpack_require__(176);
+	
+	var _superagent2 = _interopRequireDefault(_superagent);
+	
+	var _APIClient = __webpack_require__(181);
+	
+	var _APIClient2 = _interopRequireDefault(_APIClient);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Startups = function (_Component) {
+	  _inherits(Startups, _Component);
+	
+	  function Startups(props, context) {
+	    _classCallCheck(this, Startups);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Startups).call(this, props, context));
+	
+	    _this.state = {
+	      startups: [],
+	      title: 'Not Startups'
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Startups, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+	
+	      _APIClient2.default.get('/api/startup', null, function (err, response) {
+	
+	        var startups = response.startups;
+	
+	        _this2.setState({
+	          startups: startups,
+	          title: 'Startups!!'
+	        });
+	
+	        //console.log('componentDidMount:', JSON.stringify(response))
+	      });
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	
+	      var startupNames = this.state.startups.map(function (startup, i) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: i },
+	          startup.name
+	        );
+	      });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.state.title,
+	        _react2.default.createElement(
+	          'ol',
+	          null,
+	          startupNames
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Startups;
+	}(_react.Component);
+	
+	exports.default = Startups;
+	
+	//npm install superagent --save makes api requests, not needd in angular
+
+/***/ },
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21559,9 +21656,9 @@
 	  root = undefined;
 	}
 	
-	var Emitter = __webpack_require__(178);
-	var requestBase = __webpack_require__(179);
-	var isObject = __webpack_require__(180);
+	var Emitter = __webpack_require__(177);
+	var requestBase = __webpack_require__(178);
+	var isObject = __webpack_require__(179);
 	
 	/**
 	 * Noop.
@@ -21573,7 +21670,7 @@
 	 * Expose `request`.
 	 */
 	
-	var request = module.exports = __webpack_require__(181).bind(null, Request);
+	var request = module.exports = __webpack_require__(180).bind(null, Request);
 	
 	/**
 	 * Determine XHR.
@@ -22525,7 +22622,7 @@
 	};
 
 /***/ },
-/* 178 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22689,7 +22786,7 @@
 	};
 
 /***/ },
-/* 179 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22697,7 +22794,7 @@
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(180);
+	var isObject = __webpack_require__(179);
 	
 	/**
 	 * Clear previous timeout.
@@ -23040,7 +23137,7 @@
 	};
 
 /***/ },
-/* 180 */
+/* 179 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23062,7 +23159,7 @@
 	module.exports = isObject;
 
 /***/ },
-/* 181 */
+/* 180 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23101,7 +23198,7 @@
 	module.exports = request;
 
 /***/ },
-/* 182 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23110,119 +23207,7 @@
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _superagent = __webpack_require__(177);
-	
-	var _superagent2 = _interopRequireDefault(_superagent);
-	
-	var _APIClient = __webpack_require__(183);
-	
-	var _APIClient2 = _interopRequireDefault(_APIClient);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Startups = function (_Component) {
-	  _inherits(Startups, _Component);
-	
-	  function Startups(props, context) {
-	    _classCallCheck(this, Startups);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Startups).call(this, props, context));
-	
-	    _this.state = {
-	      startups: [],
-	      title: 'Not Startups'
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(Startups, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-	
-	      _APIClient2.default.get('/api/startup', null, function (err, response) {
-	
-	        var startups = response.startups;
-	
-	        _this2.setState({
-	          startups: startups,
-	          title: 'Startups!!'
-	        });
-	
-	        //console.log('componentDidMount:', JSON.stringify(response))
-	      });
-	
-	      // superagent
-	      // .get('/api/startup')
-	      // .query(null)
-	      // .set('Accept', 'text/json')
-	      // .end((err, response) => {
-	      //   const startups = response.body.startups
-	      //   this.setState({
-	      //     startups: startups,
-	      //     title: 'Startups!!'
-	      //   })
-	      //   //console.log(JSON.stringify(response.body))
-	      // })
-	    }
-	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {}
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	
-	      var startupNames = this.state.startups.map(function (startup, i) {
-	        return _react2.default.createElement(
-	          'li',
-	          { key: i },
-	          startup.name
-	        );
-	      });
-	
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        this.state.title,
-	        _react2.default.createElement(
-	          'ol',
-	          null,
-	          startupNames
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Startups;
-	}(_react.Component);
-	
-	exports.default = Startups;
-	
-	//npm install superagent --save makes api requests, not needd in angular
-
-/***/ },
-/* 183 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _superagent = __webpack_require__(177);
+	var _superagent = __webpack_require__(176);
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	

@@ -25,19 +25,6 @@ class Startups extends Component {
 
       //console.log('componentDidMount:', JSON.stringify(response))
     })
-    
-    // superagent
-    // .get('/api/startup')
-    // .query(null)
-    // .set('Accept', 'text/json')
-    // .end((err, response) => {
-    //   const startups = response.body.startups
-    //   this.setState({
-    //     startups: startups,
-    //     title: 'Startups!!'
-    //   })
-    //   //console.log(JSON.stringify(response.body))
-    // })
 
   }
 
